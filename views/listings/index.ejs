@@ -1,7 +1,7 @@
 <% layout ("/layouts/boilerplate")-%> 
     <!-- <h2>All Listings</h2> -->
 <style>
-       #filters{
+       /* #filters{
               display:flex;
               flex-wrap: wrap;
               align-items: center;
@@ -35,11 +35,63 @@
               align-items:center;
 
 
-       }
+       } */
+        #filters {
+              display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem 0;
+  gap: 1rem;
+  background-color: #fff8dc;
+  z-index: 0;
+  margin-top: 8rem;
+}
+
+.filter {
+  width: 6rem;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.tax-toggle {
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+@media (max-width: 576px) {
+  .tax-toggle {
+    margin: 1rem auto;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filter {
+    width: 4.5rem;
+  }
+
+  .form-check-label {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+body.navbar-open #filters {
+  margin-top: 20rem !important; /* Push filters down when navbar is open on mobile */
+}
+
+
 </style>
-
-
-     <div id="filters" class="collapse navbar-collapse">
+<section>
+ <div id="filters" class="d-flex flex-wrap justify-content-center align-items-center gap-3 px-3 mt-5">
        <div class="filter">
              <div><i class="fa-solid fa-fire"></i></div> 
              <p>Trending</p>
@@ -88,7 +140,9 @@
 </div>
        </div>
      </div>
-    <div class=" row row-cols-lg 3 row-cols-md-2 row-cols-sm-1 mt-3">
+     </section>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 mt-3 g-3">
+
     <% for(let listing of allListings){%>
     <a href="/listings/<%=listing._id%>" class="listing-link">
    <div class="card listing-card" >
@@ -128,4 +182,19 @@
 
               }
        });
+</script>
+<script>
+  const navbarToggler = document.querySelector('.navbar-toggler');
+  const body = document.body;
+
+  navbarToggler.addEventListener('click', () => {
+    body.classList.toggle('navbar-open');
+  });
+
+  // Optional: remove the class on window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      body.classList.remove('navbar-open');
+    }
+  });
 </script>

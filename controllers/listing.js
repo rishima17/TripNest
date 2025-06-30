@@ -9,6 +9,30 @@ const User=require("../models/user.js");
 // };
 module.exports.homepage=async(req,res)=>{
     console.log("home");
+res.render("./listings/home.ejs");
+    
+};
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+// Add to /remove from favourites route
+module.exports.favourites= async (req, res) => {
+    const listingId = req.params.id;
+    const user = req.user;
+
+    if (user.favourites.includes(listingId)) {
+        await User.findByIdAndUpdate(user._id, { $pull: { favourites: listingId } });
+        req.flash("success", "Listing removed from favourites!");
+    } else {
+        await User.findByIdAndUpdate(user._id, { $addToSet: { favourites: listingId } });
+        req.flash("success", "Listing added to favourites!");
+    }
+
+    res.redirect(`/listings/${listingId}`);
+
+
     res.render("./listings/home.ejs");
 };
 
