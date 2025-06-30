@@ -20,6 +20,8 @@ const User=require("./models/user.js");
 const ListingRouter=require("./routes/listings.js");
 const ReviewRouter=require("./routes/reviews.js");
 const UserRouter=require("./routes/users.js");
+const HomeRouter=require("./routes/home.js");
+
 const { truncateSync } = require("fs");
  //const dbUrl = "mongodb://127.0.0.1:27017/WanderLust";
 
@@ -100,7 +102,7 @@ app.get("/demouser",async(req,res)=>{
     res.send(newUser);
 });
 
-
+app.use("/",HomeRouter);
 app.use("/listings",ListingRouter);
 app.use("/listings/:id/reviews",ReviewRouter);
 app.use("/",UserRouter);

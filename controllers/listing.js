@@ -1,13 +1,17 @@
 const Listing=require("../models/listing.js");
 const User=require("../models/user.js");
 
-
 // .exports.index=async (req, res) => {
 //     const allListings = await Listing.find();
 //     res.render("./listings/index.ejs", { allListings });
 //     console.log("working");module
 
 // };
+module.exports.homepage=async(req,res)=>{
+    console.log("home");
+    res.render("./listings/home.ejs");
+};
+
 module.exports.index = async (req, res) => {
     const { search } = req.query;
 

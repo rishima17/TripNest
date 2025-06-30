@@ -21,6 +21,7 @@ const validateListing=(req,res,next)=>{
 
 };
 
+
 router.route("/")
 .get(wrapAsync(listingController.index))
 .post(isLoggedin,
