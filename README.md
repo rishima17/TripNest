@@ -17,8 +17,8 @@ WanderLust is a modern, responsive travel journal application designed to help u
 
 | Frontend        | Backend        | Database       | Other Tools             |
 |-----------------|----------------|----------------|-------------------------|
-| js       | Node.js + Express | MongoDB      | JWT Authentication     |
-| Mapbox / Leaflet |                |                | AWS S3 (for media)      |
+| js  amd EJS    | Node.js + Express | MongoDB      | JWT Authentication     |
+
 
 bash
 # Clone the repository
