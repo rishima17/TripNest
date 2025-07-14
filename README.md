@@ -9,13 +9,13 @@ Project-link:https://wanderlust-p0jp.onrender.com
 ## 📸 Screenshots
 
 ### 🔹 Home Page
-<img src="./screenshots/home.png" alt="Home Page" width="500"/>
+<img src="./screenshots/Home.png" alt="Home Page" width="500"/>
 
-### 🔹 Create Campground Form
-<img src="./screenshots/create-form.png" alt="Create Form" width="500"/>
+### 🔹 Create Listing Form
+<img src="./screenshots/showListing.png" alt="Create Form" width="500"/>
 
-### 🔹 Map Integration
-<img src="./screenshots/map.png" alt="Map View" width="500"/>
+### 🔹 View Listing
+<img src="./screenshots/showListing.png" alt="Map View" width="500"/>
 
 ## 🚀 Features
 
