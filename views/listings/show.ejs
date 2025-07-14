@@ -81,17 +81,38 @@
         <h5><%=review.author.username%></h5> 
         <p class="card-text"><%=review.comment%> </p> 
         <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
-        <% if (currUser && currUser._id.equals(listing.owner._id)){%>
+       <% if (currUser && currUser._id.equals(review.author._id)) { %>
+
         <form class="mb-3" method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
             <button class="btn btn-dark btn-sm">Delete</button>
         </form>
         <%}%>
         </div>
+  
     </div>
-    <%}%>
+ <%}%>
+
     <% }%>
      
       </div>
         
     </div>
 </body>
+<<<<<<< HEAD
+=======
+<script>
+  const navbarToggler = document.querySelector('.navbar-toggler');
+  const body = document.body;
+
+  navbarToggler.addEventListener('click', () => {
+    body.classList.toggle('navbar-open');
+  });
+
+  // Optional: remove the class on window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      body.classList.remove('navbar-open');
+    }
+  });
+</script>
+>>>>>>> 82ccbead41351633b794314eb8a2367277346cce
