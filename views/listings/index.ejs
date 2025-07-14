@@ -36,15 +36,15 @@
 
 
        } */
-        #filters {
-              display:flex;
+  #filters {
+  display:flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 1rem 0;
   gap: 1rem;
   background-color: #fff8dc;
   z-index: 0;
-  margin-top: 8rem;
+ 
 }
 
 .filter {
@@ -183,18 +183,4 @@ body.navbar-open #filters {
               }
        });
 </script>
-<script>
-  const navbarToggler = document.querySelector('.navbar-toggler');
-  const body = document.body;
 
-  navbarToggler.addEventListener('click', () => {
-    body.classList.toggle('navbar-open');
-  });
-
-  // Optional: remove the class on window resize
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      body.classList.remove('navbar-open');
-    }
-  });
-</script>

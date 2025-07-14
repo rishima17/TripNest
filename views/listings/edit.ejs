@@ -50,18 +50,3 @@
 </div>
 </div>
 </body>
-<script>
-  const navbarToggler = document.querySelector('.navbar-toggler');
-  const body = document.body;
-
-  navbarToggler.addEventListener('click', () => {
-    body.classList.toggle('navbar-open');
-  });
-
-  // Optional: remove the class on window resize
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      body.classList.remove('navbar-open');
-    }
-  });
-</script>
