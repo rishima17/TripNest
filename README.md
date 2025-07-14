@@ -4,6 +4,7 @@
 > A full-stack campground listing web application where users can create, view, edit, and delete campgrounds — complete with image uploads, location maps, and user reviews.
 
 ---
+Project-link:https://wanderlust-p0jp.onrender.com
 
 ## 🚀 Features
 
@@ -86,38 +87,6 @@ npm start
 This project is licensed under the MIT License.
 
 ---
-=======
- WanderLust 🌍
-
-WanderLust is a modern, responsive travel journal application designed to help users document their journeys, discover new destinations, and share experiences with a global community.
-
- Features
-
-- Create and maintain travel journals with titles, dates, locations, photos, and rich descriptions.  
-- Use interactive maps to visualize visited locations.  
-- Engage with a community: follow users, like posts, and leave comments.  
-- Enjoy a seamless experience across devices—mobile, tablet, and desktop.
 
 
-- Node.js ≥ v14  
-- npm or yarn  
-- MongoDB (local or cloud, e.g., MongoDB Atlas)
- Tech Stack
 
-| Frontend        | Backend        | Database       | Other Tools             |
-|-----------------|----------------|----------------|-------------------------|
-| js  amd EJS    | Node.js + Express | MongoDB      | JWT Authentication     |
-| HTML  CSSs  and   |
-
-
-bash
-# Clone the repository
-git clone https://github.com/rishima17/WanderLust.git
-cd WanderLust
-
-# Install dependencies
-cd frontend && npm install
-cd ../backend && npm install/
-# WanderLust
-Project-link:https://wanderlust-p0jp.onrender.com
->>>>>>> 82ccbead41351633b794314eb8a2367277346cce
