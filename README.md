@@ -6,6 +6,21 @@
 ---
 Project-link:https://wanderlust-p0jp.onrender.com
 
+
+## 📸 Screenshots
+
+### 🔹 Home Page
+
+![Home Page](./screenshots/Home.png)
+
+### 🔹 Create Listing Form
+
+![Create Form](./screenshots/CreateListing.png)
+
+### 🔹View Listing
+
+![View Listing](./screenshots/showListing.png)
+
 ## 🚀 Features
 
 - 🔐 User Authentication (Login/SignUp)
