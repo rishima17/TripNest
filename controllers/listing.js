@@ -1,21 +1,38 @@
 const Listing=require("../models/listing.js");
 const User=require("../models/user.js");
-
-// .exports.index=async (req, res) => {
-//     const allListings = await Listing.find();
-//     res.render("./listings/index.ejs", { allListings });
-//     console.log("working");module
-
-// };
-module.exports.homepage=async(req,res)=>{
-    console.log("home");
-res.render("./listings/home.ejs");
-    
-};
-
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
+
+module.exports.homepage = async (req, res) => {
+    const { search } = req.query;
+
+    let allListings;
+    if (search) {
+        const regex = new RegExp(escapeRegex(search), 'i');
+
+        // Search in multiple fields: title, location, description
+        allListings = await Listing.find({
+            $or: [
+                { title: regex },
+                { location: regex },
+                { description: regex }
+            ]
+        });
+    } else {
+        allListings = await Listing.find();
+    }
+
+    res.render("./listings/home.ejs", { allListings, search });
+    
+};
+// module.exports.homepage=async(req,res)=>{
+//     console.log("home");
+// res.render("./listings/home.ejs",{ allListings, search });
+    
+// };
+
+
 
 // Add to /remove from favourites route
 module.exports.favourites= async (req, res) => {
@@ -33,7 +50,7 @@ module.exports.favourites= async (req, res) => {
     res.redirect(`/listings/${listingId}`);
 
 
-    res.render("./listings/home.ejs");
+    res.render("./listings/home.ejs",{ allListings, search });
 };
 
 module.exports.index = async (req, res) => {
