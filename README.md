@@ -1,6 +1,6 @@
 # 🏕️ Wanderlust
 
-> A full-stack campground listing web application where users can create, view, edit, and delete campgrounds — complete with image uploads, location maps, and user reviews.
+> A full-stack campground listing web application where users can create, view, edit, and delete campgrounds — complete with image uploads, and user reviews.
 
 ---
 
