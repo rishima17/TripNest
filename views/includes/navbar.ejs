@@ -1,204 +1,92 @@
-<!-- <style>
- .search-btn{
-  background-color:#fe424d;
-  color:white ;
-  border-radius:25px;
-  padding:0 1rem 0 1rem;
-
- }
- .search-btn:hover{
-    background-color:#fe424d;
-  color:white ;
- }
- .search-btn i {
-  display:inline;
-  margin-right:0.5rem;
-
- }
- .search-inp{
-  border-radius:25px;
-  padding:0.5rem 3rem 0.5rem 3rem;
- }
- .add {
-  color:#fe424d;
-  margin-right:0.5rem;
- }
- @media (max-width: 768px) {
-  .navbar-nav .nav-link {
-    padding: 0.5rem 0;
-    font-size: 1rem;
+<style>
+  .brand-text {
+    font-weight: 800;
+    color: #fe424d;
+    margin-right: 0.3rem; /* small space between text and icon */
   }
-
-  .search-btn {
+  .brand-text:hover {
+    color: #d6333c; /* darker red on hover */
+  }
+  body {
+  margin: 0;
+  padding: 0;
+}
+/* Mobile menu fix */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    background: #fff;  /* solid background */
+    position: absolute;
+    top: 60px; /* same height as navbar */
+    left: 0;
     width: 100%;
-    margin-top: 0.5rem;
-    padding: 0 1rem 0 1rem;
+    height: 100vh; /* full screen height */
+    z-index: 999;   /* above content */
+    padding: 1rem;
   }
 
-  .search-inp {
-    width: 100%;
+  .navbar-collapse .search-bar {
+    display: none; /* hide search in mobile */
   }
- }
-
+}
 
 
 </style>
-
-
 
 <nav class="navbar navbar-expand-md bg-body-light bottom-border sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand fa-compass" href="/listings" ><i class="fa-regular fa-compass" ></i></a>
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="/listings">
+      <span class="brand-text">TripNest</span>
+      <i class="fa-regular fa-compass fs-4"></i>
+    </a>
+
+    <!-- Toggler -->
     <button class="navbar-toggler" type="button"
-     data-bs-toggle="collapse" 
-     data-bs-target="#navbarNavAltMarkup">
-      
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Collapse -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link nav" href="/listings"><h5>Explore</h5></a>
-        <a class="nav-link nav" href="/listings/favourite"><b><h5><i class="fa-solid fa-heart-circle-bolt add" style="margin-right:0.2rem;"></i>My Favourites</h5></b></a>
-        </div>
-        <div class="navbar-nav ms-auto">
-    <form class="d-flex" role="search" method="GET" action="/listings">
-      <input class="form-control me-2 search-inp " 
-      type="search" 
-      placeholder="Search Destination" 
-      aria-label="Search"
-      name="search"
-      />
-      <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-    </form>
-  </div>
-  <div>
-   
-  </div>
-
-      <div class="navbar-nav  ms-auto">
-        <a class="nav-link nav" href="/listings/new"><h5><i class="fa-solid fa-location-dot add"></i>Add Your Listing</h5></a>
-      <% if (!currUser){%>
-        <a class="nav-link nav"  href="/signup"><b><h5><i class="fa-solid fa-user-plus add"></i>SignUp</h5></b></a>
-        <a class="nav-link nav" href="/login"><b><h5><i class="fa-solid fa-user add"></i>Login</h5></b></a>
-        <%}%>
-        <% if (currUser){%>
-       <a class="nav-link nav" href="/logout"><b><h5><i class="fa-solid fa-user-minus add"></i>Logout</h5></i></b></a>
-          <%}%>
-         
-
-
-
-
-</div>
-
       
+      <!-- Left nav -->
+      <div class="navbar-nav">
+        <a class="nav-link nav" href="/listings/favourite">
+          <b><h5><i class="fa-solid fa-heart-circle-bolt add"></i> My Favourites</h5></b>
+        </a>
+      </div>
+
+      <!-- Search (center / right aligned) -->
+      <div class="navbar-nav ms-auto search-bar">
+        <form class="d-flex search-bar" role="search" method="GET" action="/listings">
+          <input class="form-control me-2 search-inp"
+            type="search"
+            placeholder="Search Destination"
+            aria-label="Search"
+            name="search"/>
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Right nav -->
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link nav" href="/listings/new">
+          <h5><i class="fa-solid fa-location-dot add"></i>Add Your Listing</h5>
+        </a>
+
+        <% if (!currUser){ %>
+          <a class="nav-link nav" href="/signup"><b><h5><i class="fa-solid fa-user-plus add"></i> SignUp</h5></b></a>
+          <a class="nav-link nav" href="/login"><b><h5><i class="fa-solid fa-user add"></i> Login</h5></b></a>
+        <% } %>
+
+        <% if (currUser){ %>
+          <a class="nav-link nav" href="/logout"><b><h5><i class="fa-solid fa-user-minus add"></i> Logout</h5></b></a>
+        <% } %>
+      </div>
     </div>
   </div>
 </nav>
-
-<script>
-  const nav = document.querySelector('.navbar');
-  const content = document.querySelector('main, .container'); // Adjust selector
-
-  if (nav && content) {
-    const navHeight = nav.offsetHeight;
-    content.style.marginTop = navHeight + 'px';
-  }
-</script>
-
- -->
-<!-- Add this to your <head> if not already included -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<style>
-  .search-btn {
-    background-color: #fe424d;
-    color: white;
-    border-radius: 25px;
-    padding: 0 1rem;
-  }
-
-  .search-btn:hover {
-    background-color: #fe424d;
-    color: white;
-  }
-
-  .search-btn i {
-    margin-right: 0.5rem;
-  }
-
-  .search-inp {
-    border-radius: 25px;
-    padding: 0.5rem 3rem;
-  }
-
-  .add {
-    color: #fe424d;
-    margin-right: 0.5rem;
-  }
-
-  @media (max-width: 768px) {
-    .search-btn,
-    .search-inp {
-      width: 100%;
-    }
-
-    .search-btn {
-      margin-top: 0.5rem;
-    }
-  }
-</style>
-
-<!-- Navbar -->
-<nav class="navbar bg-body-light sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand fa-compass" href="/listings">
-      <i class="fa-regular fa-compass"></i>
-    </a>
-
-    <!-- Toggler button triggers Offcanvas -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Desktop search bar -->
-    <form class="d-none d-md-flex ms-auto" role="search" method="GET" action="/listings">
-      <input class="form-control me-2 search-inp" type="search" placeholder="Search Destination" aria-label="Search" name="search">
-      <button class="btn search-btn" type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>Search
-      </button>
-    </form>
-  </div>
-</nav>
-
-<!-- Offcanvas for mobile nav -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="mobileMenuLabel">Menu</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <a class="nav-link" href="/listings"><h5>Explore</h5></a>
-    <a class="nav-link" href="/listings/favourite"><h5><i class="fa-solid fa-heart-circle-bolt add"></i>My Favourites</h5></a>
-
-    <!-- Mobile search -->
-    <form class="d-flex my-3" role="search" method="GET" action="/listings">
-      <input class="form-control me-2 search-inp" type="search" placeholder="Search Destination" aria-label="Search" name="search">
-      <button class="btn search-btn" type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>Search
-      </button>
-    </form>
-
-    <a class="nav-link" href="/listings/new"><h5><i class="fa-solid fa-location-dot add"></i>Add Your Listing</h5></a>
-
-    <% if (!currUser) { %>
-      <a class="nav-link" href="/signup"><h5><i class="fa-solid fa-user-plus add"></i>SignUp</h5></a>
-      <a class="nav-link" href="/login"><h5><i class="fa-solid fa-user add"></i>Login</h5></a>
-    <% } %>
-
-    <% if (currUser) { %>
-      <a class="nav-link" href="/logout"><h5><i class="fa-solid fa-user-minus add"></i>Logout</h5></a>
-    <% } %>
-  </div>
-</div>
