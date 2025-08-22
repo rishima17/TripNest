@@ -1,55 +1,45 @@
-# 🏕️ Wanderlust
+🏡 TripNest
 
-> A full-stack campground listing web application where users can create, view, edit, and delete campgrounds — complete with image uploads, and user reviews.
+A full-stack travel & stay listing application where users can create, view, edit, and delete listings — complete with image uploads, reviews, and category-based filters.
 
----
+🌍 Live Project: https://wanderlust-p0jp.onrender.com
 
-Project-link:https://wanderlust-p0jp.onrender.com
-
-## 📸 Screenshots
-
-### 🔹 Home Page
-
+📸 Screenshots
+🔹 Home Page
 <img src="./screenshots/Home.png" alt="Home Page" width="500"/>
-
-### 🔹 Create Listing Form
-
+🔹 Create Listing Form
 <img src="./screenshots/CreateListing.png" alt="Create Form" width="500"/>
+🔹 View Listing
+<img src="./screenshots/ShowListing.png" alt="Map View" width="500"/>
+🚀 Features
 
-### 🔹 View Listing
+🔐 User Authentication (Login/SignUp)
 
-<img src="./screenshots/showListing.png" alt="Map View" width="500"/>
+🏡 Create, Read, Update, Delete (CRUD) for Listings
 
-## 🚀 Features
+🖼️ Upload listing images (Cloudinary)
 
-- 🔐 User Authentication (Login/SignUp)
-- 🏕️ Create, Read, Update, Delete (CRUD) for Listings
-- 🖼️ Upload Listings images (Cloudinary)
-- 💬 Post and delete reviews
-- 🔎 Search for Listings
-- 🌐 Responsive EJS frontend with Bootstrap styling
-- ⚠️ Input validation and error handling
+💬 Post and delete reviews
 
----
+🔎 Search & Category-based filters
 
-## 🛠️ Tech Stack
+📱 Fully responsive design for mobile & desktop
 
-| Category       | Technology                           |
-| -------------- | ------------------------------------ |
-| Frontend       | HTML, CSS, Bootstrap, EJS            |
-| Backend        | Node.js, Express.js                  |
-| Database       | MongoDB, Mongoose                    |
-| Authentication | Passport.js (Local Strategy)         |
-| File Uploads   | Multer + Cloudinary                  |
-| Validation     | Joi, Express Error Middleware        |
-| Deployment     | (Optional) Render / Vercel / Netifly |
+🌐 EJS templating with Bootstrap styling
 
----
+⚠️ Input validation and error handling
 
-## 📂 Folder Structure
-
-```
-wanderlust/
+🛠️ Tech Stack
+Category	Technology
+Frontend	HTML, CSS, Bootstrap, EJS
+Backend	Node.js, Express.js
+Database	MongoDB, Mongoose
+Authentication	Passport.js (Local Strategy)
+File Uploads	Multer + Cloudinary
+Validation	Joi, Express Error Middleware
+Deployment	Render / Vercel / Netlify
+📂 Folder Structure
+TripNest/
 ├── models/
 ├── routes/
 ├── public/
@@ -58,46 +48,34 @@ wanderlust/
 ├── utils/
 ├── app.js
 └── README.md
-```
 
----
+🧪 Setup Instructions
 
-## 🧪 Setup Instructions
+Clone the repo:
 
-1. **Clone the repo:**
+git clone https://github.com/rishima17/TripNest.git
+cd TripNest
 
-```bash
-git clone https://github.com/your-username/wanderlust.git
-cd wanderlust
-```
 
-2. **Install dependencies:**
+Install dependencies:
 
-```bash
 npm install
-```
 
-3. **Set up environment variables:**  
-   Create a `.env` file:
 
-```env
+Set up environment variables:
+Create a .env file:
+
 DB_URL=your_mongodb_url
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_KEY=your_api_key
 CLOUDINARY_SECRET=your_api_secret
 SESSION_SECRET=your_random_secret
-```
 
-4. **Run the app:**
 
-```bash
+Run the app:
+
 npm start
-```
 
----
-
-## 📄 License
+📄 License
 
 This project is licensed under the MIT License.
-
----
