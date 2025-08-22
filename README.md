@@ -1,31 +1,31 @@
-🏡 TripNest
+🏕️ TripNest
 
-A full-stack travel & stay listing application where users can create, view, edit, and delete listings — complete with image uploads, reviews, and category-based filters.
+A full-stack travel & stay listing web application where users can create, view, edit, and delete listings — with image uploads, reviews, favourites, and category filters.
 
-🌍 Live Project: https://wanderlust-p0jp.onrender.com
+🔗 Live Project: https://wanderlust-p0jp.onrender.com/
 
 📸 Screenshots
 🔹 Home Page
-<img src="./screenshots/Home.png" alt="Home Page" width="500"/>
+<img src="./screenshots/Home.png" alt="Home Page" width="600"/>
 🔹 Create Listing Form
-<img src="./screenshots/CreateListing.png" alt="Create Form" width="500"/>
+<img src="./screenshots/CreateListing.png" alt="Create Form" width="600"/>
 🔹 View Listing
-<img src="./screenshots/showListing.png" alt="Map View" width="500"/>
+<img src="./screenshots/showListing.png" alt="Show Listing" width="600"/>
 🚀 Features
 
 🔐 User Authentication (Login/SignUp)
 
-🏡 Create, Read, Update, Delete (CRUD) for Listings
+🏕️ Create, Read, Update, Delete (CRUD) for Listings
 
-🖼️ Upload listing images (Cloudinary)
+🖼️ Image Uploads via Multer + Cloudinary
+
+❤️ Add/Remove favourites
 
 💬 Post and delete reviews
 
-🔎 Search & Category-based filters
+🔎 Search and filter listings by category
 
 📱 Fully responsive design for mobile & desktop
-
-🌐 EJS templating with Bootstrap styling
 
 ⚠️ Input validation and error handling
 
@@ -34,12 +34,12 @@ Category	Technology
 Frontend	HTML, CSS, Bootstrap, EJS
 Backend	Node.js, Express.js
 Database	MongoDB, Mongoose
-Authentication	Passport.js (Local Strategy)
-File Uploads	Multer + Cloudinary
+Auth	Passport.js (Local Strategy)
+Uploads	Multer + Cloudinary
 Validation	Joi, Express Error Middleware
 Deployment	Render / Vercel / Netlify
 📂 Folder Structure
-TripNest/
+tripnest/
 ├── models/
 ├── routes/
 ├── public/
@@ -54,7 +54,7 @@ TripNest/
 Clone the repo:
 
 git clone https://github.com/rishima17/TripNest.git
-cd TripNest
+cd tripnest
 
 
 Install dependencies:
@@ -62,8 +62,8 @@ Install dependencies:
 npm install
 
 
-Set up environment variables:
-Create a .env file:
+Set up environment variables
+Create a .env file in the project root:
 
 DB_URL=your_mongodb_url
 CLOUDINARY_CLOUD_NAME=your_cloud_name
