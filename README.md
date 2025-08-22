@@ -10,7 +10,7 @@ A full-stack travel & stay listing application where users can create, view, edi
 🔹 Create Listing Form
 <img src="./screenshots/CreateListing.png" alt="Create Form" width="500"/>
 🔹 View Listing
-<img src="./screenshots/ShowListing.png" alt="Map View" width="500"/>
+<img src="./screenshots/showListing.png" alt="Map View" width="500"/>
 🚀 Features
 
 🔐 User Authentication (Login/SignUp)
