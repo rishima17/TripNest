@@ -1,17 +1,17 @@
-const Listing=require("../models/listing.js");
-const User=require("../models/user.js");
+const Listing = require("../models/listing.js");
+const User = require("../models/user.js");
+
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
+// Homepage
 module.exports.homepage = async (req, res) => {
     const { search } = req.query;
 
     let allListings;
     if (search) {
         const regex = new RegExp(escapeRegex(search), 'i');
-
-        // Search in multiple fields: title, location, description
         allListings = await Listing.find({
             $or: [
                 { title: regex },
@@ -23,44 +23,20 @@ module.exports.homepage = async (req, res) => {
         allListings = await Listing.find();
     }
 
-    res.render("./listings/home.ejs", { allListings, search });
-    
-};
-// module.exports.homepage=async(req,res)=>{
-//     console.log("home");
-// res.render("./listings/home.ejs",{ allListings, search });
-    
-// };
-
-
-
-// Add to /remove from favourites route
-module.exports.favourites= async (req, res) => {
-    const listingId = req.params.id;
-    const user = req.user;
-
-    if (user.favourites.includes(listingId)) {
-        await User.findByIdAndUpdate(user._id, { $pull: { favourites: listingId } });
-        req.flash("success", "Listing removed from favourites!");
-    } else {
-        await User.findByIdAndUpdate(user._id, { $addToSet: { favourites: listingId } });
-        req.flash("success", "Listing added to favourites!");
-    }
-
-    res.redirect(`/listings/${listingId}`);
-
-
-    res.render("./listings/home.ejs",{ allListings, search });
+    res.render("./listings/home.ejs", { 
+        allListings, 
+        search, 
+        activeCategory: null   // ✅ always defined
+    });
 };
 
+// All listings (index page)
 module.exports.index = async (req, res) => {
     const { search } = req.query;
 
     let allListings;
     if (search) {
         const regex = new RegExp(escapeRegex(search), 'i');
-
-        // Search in multiple fields: title, location, description
         allListings = await Listing.find({
             $or: [
                 { title: regex },
@@ -72,16 +48,35 @@ module.exports.index = async (req, res) => {
         allListings = await Listing.find();
     }
 
-    res.render("./listings/index.ejs", { allListings, search });
-    
+    res.render("./listings/index.ejs", { 
+        allListings, 
+        search, 
+        activeCategory: null   // ✅ always defined
+    });
 };
 
-function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-}
+module.exports.filterByCategory = async (req, res) => {
+    const { category } = req.params;
 
-// Add to /remove from favourites route
-module.exports.favourites= async (req, res) => {
+    let allListings;
+    if (category === "Trending") {
+        // Show all listings if category is Trending
+        allListings = await Listing.find({});
+    } else {
+        // Filter listings by the selected category
+        allListings = await Listing.find({ category });
+    }
+
+    res.render("./listings/index.ejs", { 
+        allListings, 
+        search: null, 
+        activeCategory: category 
+    });
+};
+
+
+// Add to / remove from favourites
+module.exports.favourites = async (req, res) => {
     const listingId = req.params.id;
     const user = req.user;
 
@@ -96,31 +91,34 @@ module.exports.favourites= async (req, res) => {
     res.redirect(`/listings/${listingId}`);
 };
 
-//Favourites page
- module.exports.myFav=async (req, res) => {
+// Favourites page
+module.exports.myFav = async (req, res) => {
     const user = await User.findById(req.user._id).populate("favourites");
     res.render("listings/favourites", { favourites: user.favourites });
 };
 
-module.exports.renderNewForm=(req, res) => {
-  res.render("listings/new.ejs");
-
+// New form
+module.exports.renderNewForm = (req, res) => {
+    res.render("listings/new.ejs");
 };
-module.exports.showListing=async (req, res) => {
+
+// Show one listing
+module.exports.showListing = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id).populate({
-    path: "reviews",
-    populate: {
-      path: "author"
-    }
-  }).populate("owner");
-    if (!listing){
-    req.flash("error","Listing You Requested Was deleted!");  
-  return res.redirect("/listings");  
-    }
-    res.render("./listings/show.ejs", { listing });
+        path: "reviews",
+        populate: { path: "author" }
+    }).populate("owner");
 
+    if (!listing) {
+        req.flash("error", "Listing You Requested Was deleted!");
+        return res.redirect("/listings");
+    }
+
+    res.render("./listings/show.ejs", { listing });
 };
+
+// Create new listing
 module.exports.createListing = async (req, res, next) => {
     if (!req.file) {
         req.flash("error", "Image is required!");
@@ -135,44 +133,40 @@ module.exports.createListing = async (req, res, next) => {
     newListing.image = { url, filename };
 
     await newListing.save();
-    console.log("req.file:", req.file);
 
     req.flash("success", "New Listing Added!");
     res.redirect("/listings");
 };
 
-module.exports.renderEditForm=async (req, res) => {
+// Edit form
+module.exports.renderEditForm = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
-    let originalImageUrl=listing.image.url;
-     originalImageUrl=originalImageUrl.replace("/upload","/upload/w_250,q_60");
+    let originalImageUrl = listing.image.url.replace("/upload","/upload/w_250,q_60");
 
-    res.render("./listings/edit.ejs", {listing ,originalImageUrl});
+    res.render("./listings/edit.ejs", { listing, originalImageUrl });
 };
 
-
-//
-// update route
-module.exports.updateListing=async (req, res) => {
+// Update listing
+module.exports.updateListing = async (req, res) => {
     const { id } = req.params;
-    const listing = await Listing.findByIdAndUpdate(id,{...req.body.listing},{new:true});
-   
-   if(typeof req.file !=="undefined") 
-    {
-    let url=req.file.path;
-    let filename=req.file.filename;
-    listing.image={url,filename};
-    await listing.save();
-   }
+    const listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
 
-        req.flash("success"," Listing Updated!");
-        res.redirect(`/listings/${id}`);
+    if (typeof req.file !== "undefined") {
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = { url, filename };
+        await listing.save();
+    }
+
+    req.flash("success", "Listing Updated!");
+    res.redirect(`/listings/${id}`);
 };
-module.exports.destroyListing=async (req, res) => {
+
+// Delete listing
+module.exports.destroyListing = async (req, res) => {
     let { id } = req.params;
-    let deletedListing = await Listing.findByIdAndDelete(id);
-        req.flash("success","Listing Deleted!");
+    await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing Deleted!");
     res.redirect("/listings");
-
-
 };

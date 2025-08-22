@@ -1,8 +1,7 @@
 <% layout ("/layouts/boilerplate")-%> 
    
 <style>
-      
-  #filters {
+#filters {
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -10,7 +9,6 @@
   gap: 1rem;
   background-color: #fff8dc;
   z-index: 0;
- 
 }
 
 .filter {
@@ -25,6 +23,12 @@
   cursor: pointer;
 }
 
+.filter.active {
+  opacity: 1;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+
 .tax-toggle {
   border: 1px solid black;
   border-radius: 1rem;
@@ -34,6 +38,7 @@
   justify-content: center;
   white-space: nowrap;
 }
+
 @media (max-width: 576px) {
   .tax-toggle {
     margin: 1rem auto;
@@ -50,103 +55,98 @@
     text-align: center;
   }
 }
+
 body.navbar-open #filters {
   margin-top: 20rem !important; /* Push filters down when navbar is open on mobile */
 }
-
-
 </style>
+
 <section>
- <div id="filters" class="d-flex flex-wrap justify-content-center align-items-center gap-3 px-3 mt-5">
-       <div class="filter">
+  <div id="filters" class="d-flex flex-wrap justify-content-center align-items-center gap-3 px-3 mt-5">
+
+       <a href="/listings/category/Trending" class="filter text-decoration-none text-dark <%= activeCategory === 'Trending' ? 'active' : '' %>">
              <div><i class="fa-solid fa-fire"></i></div> 
              <p>Trending</p>
-       </div>
-        <div class="filter">
+       </a>
+
+       <a href="/listings/category/Rooms" class="filter text-decoration-none text-dark <%= activeCategory === 'Rooms' ? 'active' : '' %>">
              <div><i class="fa-solid fa-bed"></i></div> 
              <p>Rooms</p>
-       </div>
-        <div class="filter">
+       </a>
+
+       <a href="/listings/category/Iconic Cities" class="filter text-decoration-none text-dark <%= activeCategory === 'Iconic Cities' ? 'active' : '' %>">
              <div><i class="fa-solid fa-mountain-city"></i></div> 
              <p>Iconic Cities</p>
-       </div>
-        <div class="filter">
+       </a>
+
+       <a href="/listings/category/Mountains" class="filter text-decoration-none text-dark <%= activeCategory === 'Mountains' ? 'active' : '' %>">
              <div><i class="fa-solid fa-mountain-sun"></i></div> 
              <p>Mountains</p>
-       </div>
+       </a>
 
-        <div class="filter">
+       <a href="/listings/category/Amazing Pools" class="filter text-decoration-none text-dark <%= activeCategory === 'Amazing Pools' ? 'active' : '' %>">
              <div><i class="fa-solid fa-person-swimming"></i></div> 
              <p>Amazing Pools</p>
-       </div>
+       </a>
 
-        <div class="filter">
+       <a href="/listings/category/Castles" class="filter text-decoration-none text-dark <%= activeCategory === 'Castles' ? 'active' : '' %>">
              <div><i class="fa-solid fa-chess-rook"></i></div> 
              <p>Castles</p>
-       </div>
+       </a>
 
-        <div class="filter">
+       <a href="/listings/category/Camping" class="filter text-decoration-none text-dark <%= activeCategory === 'Camping' ? 'active' : '' %>">
              <div><i class="fa-solid fa-tent"></i></div> 
              <p>Camping</p>
-       </div>
+       </a>
 
-       <div class="filter">
+       <a href="/listings/category/Farms" class="filter text-decoration-none text-dark <%= activeCategory === 'Farms' ? 'active' : '' %>">
              <div><i class="fa-solid fa-cow"></i></div> 
              <p>Farms</p>
-       </div>
+       </a>
 
-        <div class="filter">
+       <a href="/listings/category/Arctic" class="filter text-decoration-none text-dark <%= activeCategory === 'Arctic' ? 'active' : '' %>">
              <div><i class="fa-solid fa-snowflake"></i></div> 
-             <p> Arctic </p>
-       </div>
-       <div class="tax-toggle">
-       <div class="form-check-reverse form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-  <label class="form-check-label" for="switchCheckDefault">Display Total after Taxes</label>
-</div>
-       </div>
-     </div>
-     </section>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 mt-3 g-3">
+             <p>Arctic</p>
+       </a>
 
-    <% for(let listing of allListings){%>
-    <a href="/listings/<%=listing._id%>" class="listing-link">
-   <div class="card listing-card" >
-   <img class="card-img-top" src="<%= listing.image.url %>" style="height: 20rem;"
-   alt="listing-img">
-   <div class="card-img-overlay"></div>
-   <div class="card-body">
-   <p class="card-text"><b><%=listing.title%></b>
-       <br>
-   &#8377; <%=listing.price.toLocaleString("en-IN")%>/night
-   <i class="tax-info">&nbsp; &nbsp; + 18% GST</i></p>
-  </div>
-  </div>
-</a>
-       <%}%> 
+       <div class="tax-toggle">
+         <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display Total after Taxes</label>
+         </div>
        </div>
-</body>
+ </div>
+</section>
+
+<!-- Listing Grid -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 mt-3 g-3">
+    <% for(let listing of allListings){ %>
+      <a href="/listings/<%=listing._id%>" class="listing-link">
+        <div class="card listing-card">
+          <img class="card-img-top" src="<%= listing.image.url %>" style="height: 20rem;" alt="listing-img">
+          <div class="card-img-overlay"></div>
+          <div class="card-body">
+            <p class="card-text">
+              <b><%= listing.title %></b><br>
+              &#8377; <%= listing.price.toLocaleString("en-IN") %>/night
+              <i class="tax-info">&nbsp;&nbsp;+ 18% GST</i>
+            </p>
+          </div>
+        </div>
+      </a>
+    <% } %> 
+</div>
 
 <script>
-       let taxSwitch=document.getElementById("switchCheckDefault");
-       taxSwitch.addEventListener("click",()=>{
-              console.log("clicked");
-              let taxInfo= document.getElementsByClassName("tax-info");
-              for(info of taxInfo){
-                     if(info.style.display!=="inline"){
-                            info.style.display="inline";
-                     
-                     }
-                     else{
-                            info.style.display="none";
-                     }
-
-
-
-
-
-
-              }
-       });
+  let taxSwitch = document.getElementById("switchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (let info of taxInfo) {
+      if (info.style.display !== "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
 </script>
-
